@@ -32,8 +32,17 @@ class Sources {
             char.textContent = alphabet[i];
             sourcesFilter === null || sourcesFilter === void 0 ? void 0 : sourcesFilter.appendChild(char);
         }
+        const sources = document.querySelector('.sources');
         if (sourcesFilter) {
             sourcesFilter.onclick = function (event) {
+                const messageNoSources = document.querySelector('.sources_message');
+                if (messageNoSources !== null) {
+                    messageNoSources.remove();
+                }
+                const news = document.querySelector('.news');
+                while (news === null || news === void 0 ? void 0 : news.firstChild) {
+                    news.removeChild(news.firstChild);
+                }
                 const target = event.target;
                 const button = target.closest('.filter__item');
                 if (button !== null && button.textContent !== null) {
@@ -50,6 +59,12 @@ class Sources {
                             return false;
                         }
                     });
+                    if (filterSourcesItems.length === 0) {
+                        const messageNoSources = document.createElement('div');
+                        messageNoSources.className = 'sources_message';
+                        sources === null || sources === void 0 ? void 0 : sources.appendChild(messageNoSources);
+                        messageNoSources.textContent = `There are no news sources starting with the letter ${letter.toUpperCase()}. Select another letter.`;
+                    }
                     filterSourcesItems.forEach((element) => {
                         element.style.display = 'block';
                     });

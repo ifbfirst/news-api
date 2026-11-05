@@ -6,6 +6,7 @@ class AppController extends AppLoader {
         }, callback);
     }
     getNews(e, callback) {
+        var _a, _b;
         let target = e.target;
         const newsContainer = e.currentTarget;
         while (target !== newsContainer) {
@@ -20,6 +21,12 @@ class AppController extends AppLoader {
                                 sources: sourceId,
                             },
                         }, callback);
+                        (_a = document.querySelector('.news_message')) === null || _a === void 0 ? void 0 : _a.remove();
+                        (_b = document.querySelector('.loader')) === null || _b === void 0 ? void 0 : _b.remove();
+                        const preLoader = document.createElement('div');
+                        const news = document.querySelector('.news');
+                        news.appendChild(preLoader);
+                        preLoader.className = 'loader';
                     }
                 }
                 return;

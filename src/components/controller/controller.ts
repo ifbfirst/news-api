@@ -30,6 +30,12 @@ class AppController extends AppLoader {
                             },
                             callback
                         );
+                        document.querySelector('.news_message')?.remove();
+                        document.querySelector('.loader')?.remove();
+                        const preLoader = document.createElement('div');
+                        const news = <HTMLElement>document.querySelector('.news');
+                        news.appendChild(preLoader);
+                        preLoader.className = 'loader';
                     }
                 }
                 return;

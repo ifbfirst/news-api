@@ -1,5 +1,6 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
+import './preloader.css';
 class App {
     constructor() {
         this.controller = new AppController();
@@ -8,7 +9,9 @@ class App {
     start() {
         const sources = document.querySelector('.sources');
         if (sources) {
-            sources.addEventListener('click', (e) => this.controller.getNews(e, (data) => this.view.drawNews(data)));
+            sources.addEventListener('click', (e) => {
+                this.controller.getNews(e, (data) => this.view.drawNews(data));
+            });
         }
         this.controller.getSources((data) => this.view.drawSources(data));
         this.view.drawSourcesSort();

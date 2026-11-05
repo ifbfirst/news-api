@@ -3,12 +3,9 @@ class Loader {
         this.baseLink = baseLink;
         this.options = options;
     }
-    getResp(
-        { endpoint, options = {} },
-        callback = () => {
-            console.error('No callback for GET response');
-        }
-    ) {
+    getResp({ endpoint, options = {} }, callback = () => {
+        console.error('No callback for GET response');
+    }) {
         this.load('GET', endpoint, callback, options);
     }
     errorHandler(res) {
