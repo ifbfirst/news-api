@@ -47,6 +47,7 @@ class Loader {
             .then((res) => res.json())
             .then((data) => callback(data))
             .catch((err) => console.error(err));
+        document.querySelector('.loader')?.remove();
     }
 }
 

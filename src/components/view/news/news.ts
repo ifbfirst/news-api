@@ -3,7 +3,7 @@ import './news.css';
 
 class News {
     public draw(data: ArticleResponse[]): void {
-        const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
+        const news = data.length >= 10 ? data.filter((_item, idx) => idx === 125) : data;
 
         const fragment = document.createDocumentFragment();
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
@@ -19,7 +19,7 @@ class News {
 
                     const newsMetaPhoto = <HTMLElement>newsClone.querySelector('.news__meta-photo');
                     if (newsMetaPhoto)
-                        newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.svg'})`;
+                        newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage || './src/img/news_placeholder.svg'})`;
 
                     const newsMetaAuthor = newsClone.querySelector('.news__meta-author');
                     if (newsMetaAuthor) newsMetaAuthor.textContent = item.author || item.source.name;
@@ -48,6 +48,14 @@ class News {
         if (newsDoc) {
             newsDoc.innerHTML = '';
             newsDoc.appendChild(fragment);
+        }
+
+        if (news.length === 0) {
+            const messageNoNews = document.createElement('div');
+            messageNoNews.className = 'news_message';
+
+            newsDoc?.appendChild(messageNoNews);
+            messageNoNews.textContent = 'There are no news. Select another source.';
         }
     }
 }

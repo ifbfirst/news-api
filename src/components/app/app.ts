@@ -17,6 +17,8 @@ class App {
         const sources = document.querySelector('.sources');
         if (sources) {
             sources.addEventListener('click', (e) => {
+                document.querySelector('.news_message')?.remove();
+                document.querySelector('.loader')?.remove();
                 this.controller.getNews(e, (data?: ArticlesResponse) => this.view.drawNews(data));
                 const preLoader = document.createElement('div');
                 const news = <HTMLElement>document.querySelector('.news');
