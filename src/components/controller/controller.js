@@ -6,29 +6,25 @@ class AppController extends AppLoader {
         }, callback);
     }
     getNews(e, callback) {
-        var _a, _b;
         let target = e.target;
         const newsContainer = e.currentTarget;
+        const preLoader = document.createElement('div');
+        const news = document.querySelector('.news');
+        preLoader.className = 'loader';
         while (target !== newsContainer) {
             if (target.classList.contains('source__item')) {
                 const sourceId = target.getAttribute('data-source-id');
-                if (sourceId !== null) {
-                    if (newsContainer.getAttribute('data-source') !== sourceId) {
-                        newsContainer.setAttribute('data-source', sourceId);
-                        super.getResp({
-                            endpoint: 'everything',
-                            options: {
-                                sources: sourceId,
-                            },
-                        }, callback);
-                        (_a = document.querySelector('.news_message')) === null || _a === void 0 ? void 0 : _a.remove();
-                        (_b = document.querySelector('.loader')) === null || _b === void 0 ? void 0 : _b.remove();
-                        const preLoader = document.createElement('div');
-                        const news = document.querySelector('.news');
-                        news.appendChild(preLoader);
-                        preLoader.className = 'loader';
-                    }
-                }
+                if (sourceId !== null && newsContainer.getAttribute('data-source') !== sourceId)
+                    newsContainer.setAttribute('data-source', sourceId);
+                news.innerHTML = '';
+                news.prepend(preLoader);
+                preLoader.style.display = 'block';
+                super.getResp({
+                    endpoint: 'everything',
+                    options: {
+                        sources: sourceId,
+                    },
+                }, callback);
                 return;
             }
             target = target.parentNode;

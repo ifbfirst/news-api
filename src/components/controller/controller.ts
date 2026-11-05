@@ -14,30 +14,30 @@ class AppController extends AppLoader {
     public getNews<T>(e: Event, callback: Callback<T>): void {
         let target = <HTMLElement>e.target;
         const newsContainer = <HTMLElement>e.currentTarget;
+        const preLoader = document.createElement('div');
+        const news = <HTMLElement>document.querySelector('.news');
+        preLoader.className = 'loader';
 
         while (target !== newsContainer) {
             if (target.classList.contains('source__item')) {
                 const sourceId = target.getAttribute('data-source-id');
-                if (sourceId !== null) {
-                    if (newsContainer.getAttribute('data-source') !== sourceId) {
-                        newsContainer.setAttribute('data-source', sourceId);
-                        super.getResp(
-                            {
-                                endpoint: 'everything',
-                                options: {
-                                    sources: sourceId,
-                                },
-                            },
-                            callback
-                        );
-                        document.querySelector('.news_message')?.remove();
-                        document.querySelector('.loader')?.remove();
-                        const preLoader = document.createElement('div');
-                        const news = <HTMLElement>document.querySelector('.news');
-                        news.appendChild(preLoader);
-                        preLoader.className = 'loader';
-                    }
-                }
+
+                if (sourceId !== null && newsContainer.getAttribute('data-source') !== sourceId)
+                    newsContainer.setAttribute('data-source', sourceId);
+                news.innerHTML = '';
+                news.prepend(preLoader);
+                preLoader.style.display = 'block';
+
+                super.getResp(
+                    {
+                        endpoint: 'everything',
+                        options: {
+                            sources: <string>sourceId,
+                        },
+                    },
+                    callback
+                );
+
                 return;
             }
             target = <HTMLElement>target.parentNode;
