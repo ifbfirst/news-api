@@ -9,11 +9,11 @@ class Sources {
                 if (sourceClone) {
                     const sourceItemName = sourceClone.querySelector('.source__item-name');
                     if (sourceItemName) {
-                        sourceItemName.textContent = item.source.name;
+                        sourceItemName.textContent = item.name;
                     }
                     const sourceItem = sourceClone.querySelector('.source__item');
-                    if (sourceItem && item.source.id) {
-                        sourceItem.setAttribute('data-source-id', item.source.id);
+                    if (sourceItem && item.id) {
+                        sourceItem.setAttribute('data-source-id', item.id);
                     }
                     fragment.append(sourceClone);
                 }

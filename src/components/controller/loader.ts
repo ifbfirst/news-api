@@ -1,5 +1,5 @@
 type Options = {
-    apiKey: string;
+    [apiKey: string]: string;
 };
 type Callback<T> = (data?: T) => void;
 
@@ -12,7 +12,7 @@ class Loader {
     }
 
     getResp(
-        { endpoint, options = {} },
+        { endpoint, options = {} }: { endpoint: string; options: Record<string, string> },
         callback = () => {
             console.error('No callback for GET response');
         }
@@ -30,7 +30,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options, endpoint: string) {
+    makeUrl(options: Options, endpoint: string): string {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
