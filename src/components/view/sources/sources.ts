@@ -2,7 +2,7 @@ import { SourceResponse } from '../../../types';
 import './sources.css';
 
 class Sources {
-    public draw(data: SourceResponse[]) {
+    public draw(data: SourceResponse[]): void {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
 
@@ -28,7 +28,7 @@ class Sources {
         if (sourcesDoc) sourcesDoc.append(fragment);
     }
 
-    drawSort() {
+    public drawSort(): void {
         const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const sourcesFilter = <HTMLElement>document.querySelector('.sources_filter');
         for (let i = 0; i < alphabet.length; i = i + 1) {

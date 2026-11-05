@@ -12,7 +12,7 @@ class App {
         this.view = new AppView();
     }
 
-    public start() {
+    public start(): void {
         const sources = document.querySelector('.sources');
         if (sources) {
             sources.addEventListener('click', (e) =>
