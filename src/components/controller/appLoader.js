@@ -1,5 +1,4 @@
 import Loader from './loader';
-
 class AppLoader extends Loader {
     constructor() {
         super(process.env.API_URL, {
@@ -7,5 +6,4 @@ class AppLoader extends Loader {
         });
     }
 }
-
 export default AppLoader;
