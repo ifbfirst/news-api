@@ -1,12 +1,48 @@
-.sources {
+.sources,
+.sources_filter {
+    margin-top:40px;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
-    height: 120px;
     overflow: auto;
     align-items: center;
     font: 300 1em 'Fira Sans', sans-serif;
 }
+.source__item {
+display: none;
+}
+
+.sources_filter{
+ 
+    max-width: 850px;
+    margin:0 auto;
+}
+
+.sources_message {
+     font: 300 1em 'Fira Sans', sans-serif;
+    color: #fff;
+    text-align: center;
+    border: 1px solid #fff;
+    max-width: 300px;
+    margin:20px auto;
+    padding:20px;
+    opacity:0; 
+    transition: 1s; 
+    animation: show 2s 1; 
+    animation-fill-mode: forwards;
+    animation-delay: 0.2s; 
+   
+}
+
+@keyframes show{
+    0%{
+    opacity:0;
+    }
+    100% {
+    opacity:1;
+    }
+    }
 
 .source__item {
     background: none;
@@ -20,8 +56,22 @@
     cursor: pointer;
 }
 
+.filter__item {
+    background: none;
+    border: 2px solid #30c5ff;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    color: #70d6ff;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
 .source__item:hover,
-.source__item:focus {
+.source__item:focus,
+.filter__item:hover,
+.filter__item:focus{
     border-color: #3fcc59;
     color: #69db7e;
     box-shadow: 0 0.5em 0.5em -0.4em #3fcc59;

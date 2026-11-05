@@ -2,6 +2,10 @@ body {
     color: #fff;
     background: #17181c;
     font-family: sans-serif;
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+
 }
 
 header {
@@ -11,6 +15,13 @@ header {
 header h1 {
     font-size: 40px;
     font-weight: 800;
+    text-align: center;
+}
+
+main {
+max-width: 1440px;
+margin: 0 auto;
+flex-grow: 1;
 }
 
 footer {
@@ -18,18 +29,48 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap:20px;
 }
-footer .copyright {
+
+
+footer .copyright,
+.footer__link
+ {
+    position: relative;
     font-size: 14px;
     color: #333;
     text-align: center;
 }
-footer .copyright a {
+footer .copyright a,
+.footer__link a {
     color: #444;
 }
-footer .copyright a:hover {
+footer .copyright a:hover,
+.footer__link a:hover {
     color: #555;
 }
 footer .copyright:before {
     content: '©';
+}
+
+.footer__link_rss:after {
+    position: absolute;
+    content: "";
+    display: inline-block;
+    background: url("img/rs_school_js.svg") no-repeat  #fff;
+    border: 2px solid #fff;
+    width:40px;
+    height:15px;
+    margin-left: 10px;
+    padding: 4px;
+    bottom:0;
+}
+
+/*media*/
+
+@media screen and (max-width: 500px) {
+    footer {
+        flex-direction: column;
+        height:auto;
+    }
 }
