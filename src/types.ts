@@ -34,6 +34,6 @@ export interface ArticlesResponse {
 }
 
 enum Status {
-    ok,
-    error,
+    Ok = 'ok',
+    Error = 'error',
 }

@@ -17,6 +17,12 @@ display: none;
     margin:0 auto;
 }
 
+.sources_message {
+    margin-top:20px;
+    font: 300 1em 'Fira Sans', sans-serif;
+    color: #fff;
+}
+
 .source__item {
     background: none;
     border: 2px solid #30c5ff;
