@@ -1,12 +1,12 @@
 type Options = {
-    [apiKey: string]: string;
+    [apiKey: string]: string | undefined;
 };
 type Callback<T> = (data?: T) => void;
 
 class Loader {
-    baseLink: string;
+    baseLink: string | undefined;
     options: Options;
-    constructor(baseLink: string, options: Options) {
+    constructor(baseLink: string | undefined, options: Options) {
         this.baseLink = baseLink;
         this.options = options;
     }
