@@ -9,7 +9,7 @@ export interface SourceResponse {
 }
 
 export interface SourcesResponse {
-    status: 'ok' | 'error';
+    status: Status;
     sources: SourceResponse[];
 }
 
@@ -28,7 +28,12 @@ export interface ArticleResponse {
 }
 
 export interface ArticlesResponse {
-    status: 'ok' | 'error';
+    status: Status;
     totalResults: number;
     articles: ArticleResponse[];
+}
+
+enum Status {
+    ok,
+    error,
 }
