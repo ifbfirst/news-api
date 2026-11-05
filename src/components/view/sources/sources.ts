@@ -27,6 +27,17 @@ class Sources {
         const sourcesDoc = document.querySelector('.sources');
         if (sourcesDoc) sourcesDoc.append(fragment);
     }
+
+    // drawSort() {
+    //     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    //     const sourcesFilter = document.querySelector('.sources_filter');
+    //     for (let i = 0; i < alphabet.length; i = i + 1) {
+    //         const char = <HTMLElement>document.createElement('div');
+    //         char.className = 'filter__item';
+    //         char.textContent = alphabet[i];
+    //         sourcesFilter?.appendChild(char);
+    //     }
+    // }
 }
 
 export default Sources;
