@@ -1,47 +1,57 @@
 import AppLoader from './appLoader';
-type Callback<T> = (data?: T) => void;
+import { ArticlesResponse, Callback, Endpoint, SourcesResponse } from '../../types';
 
 class AppController extends AppLoader {
-    public getSources<T>(callback: Callback<T>): void {
-        super.getResp(
+    public getSources(callback: Callback<SourcesResponse>): void {
+        super.getResp<SourcesResponse>(
             {
-                endpoint: 'sources',
+                endpoint: Endpoint.Sources,
             },
             callback
         );
     }
 
-    public getNews<T>(e: Event, callback: Callback<T>): void {
-        let target = <HTMLElement>e.target;
-        const newsContainer = <HTMLElement>e.currentTarget;
-        const preLoader = document.createElement('div');
-        const news = <HTMLElement>document.querySelector('.news');
+    public getNews(e: Event, callback: Callback<ArticlesResponse>): void {
+        let target: HTMLElement = e.target as HTMLElement;
+        const newsContainer: HTMLElement = e.currentTarget as HTMLElement;
+        const preLoader: HTMLDivElement = document.createElement('div');
+        const news: HTMLElement | null = document.querySelector('.news');
+
+        if (!news) {
+            return;
+        }
+
         preLoader.className = 'loader';
 
         while (target !== newsContainer) {
             if (target.classList.contains('source__item')) {
-                const sourceId = target.getAttribute('data-source-id');
+                const sourceId: string | null = target.getAttribute('data-source-id');
 
-                if (sourceId !== null && newsContainer.getAttribute('data-source') !== sourceId)
+                if (sourceId !== null && newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
+                }
+
                 news.innerHTML = '';
                 news.prepend(preLoader);
                 preLoader.style.display = 'block';
-
-                super.getResp(
-                    {
-                        endpoint: 'everything',
-                        options: {
-                            sources: <string>sourceId,
-                        },
-                    },
-                    callback
-                );
-
+                this.loadNews(sourceId, callback);
                 return;
             }
-            target = <HTMLElement>target.parentNode;
+
+            target = target.parentNode as HTMLElement;
         }
+    }
+
+    private loadNews(sourceId: string | null, callback: Callback<ArticlesResponse>): void {
+        super.getResp<ArticlesResponse>(
+            {
+                endpoint: Endpoint.Everything,
+                options: {
+                    sources: sourceId ?? '',
+                },
+            },
+            callback
+        );
     }
 }
 

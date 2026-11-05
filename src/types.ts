@@ -1,4 +1,30 @@
-export interface SourceResponse {
+export enum Status {
+    Ok = 'ok',
+    Error = 'error',
+}
+
+export enum Endpoint {
+    Sources = 'sources',
+    Everything = 'everything',
+}
+
+export enum HttpMethod {
+    Get = 'GET',
+}
+
+export enum HttpStatus {
+    Unauthorized = 401,
+    NotFound = 404,
+}
+
+export type SourceId = string | null;
+
+export type ArticleSource = {
+    id: SourceId;
+    name: string;
+};
+
+export type SourceResponse = {
     id: string;
     name: string;
     description: string;
@@ -6,34 +32,43 @@ export interface SourceResponse {
     category: string;
     language: string;
     country: string;
-}
+};
 
-export interface SourcesResponse {
+export type SourcesResponse = {
     status: Status;
     sources: SourceResponse[];
-}
+};
 
-export interface ArticleResponse {
-    source: {
-        id: string | null;
-        name: string;
-    };
-    author: string;
+export type ArticleResponse = {
+    source: ArticleSource;
+    author: string | null;
     title: string;
-    description: string;
+    description: string | null;
     url: string;
-    urlToImage: string;
+    urlToImage: string | null;
     publishedAt: string;
-    content: string;
-}
+    content: string | null;
+};
 
-export interface ArticlesResponse {
+export type ArticlesResponse = {
     status: Status;
     totalResults: number;
     articles: ArticleResponse[];
-}
+};
 
-enum Status {
-    Ok = 'ok',
-    Error = 'error',
-}
+export type LoaderOptions = {
+    [key: string]: string | undefined;
+};
+
+export type RequestOptions = {
+    sources?: string;
+};
+
+export type GetRespParams = {
+    endpoint: Endpoint;
+    options?: RequestOptions;
+};
+
+export type Callback<T> = (data?: T) => void;
+
+export type DateParts = [string, string, string];
