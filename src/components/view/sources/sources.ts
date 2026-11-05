@@ -1,22 +1,22 @@
-import { NewsSource } from '../../../types';
+import { SourceResponse } from '../../../types';
 import './sources.css';
 
 class Sources {
-    draw(data: NewsSource[]) {
+    draw(data: SourceResponse[]) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
 
-        data.forEach((item: NewsSource) => {
+        data.forEach((item: SourceResponse) => {
             if (sourceItemTemp) {
                 const sourceClone: Element | null = <HTMLElement>sourceItemTemp.content.cloneNode(true);
                 if (sourceClone) {
                     const sourceItemName = sourceClone.querySelector('.source__item-name');
                     if (sourceItemName) {
-                        sourceItemName.textContent = item.source.name;
+                        sourceItemName.textContent = item.name;
                     }
                     const sourceItem = sourceClone.querySelector('.source__item');
-                    if (sourceItem && item.source.id) {
-                        sourceItem.setAttribute('data-source-id', item.source.id);
+                    if (sourceItem && item.id) {
+                        sourceItem.setAttribute('data-source-id', item.id);
                     }
 
                     fragment.append(sourceClone);
@@ -24,7 +24,8 @@ class Sources {
             }
         });
 
-        document.querySelector('.sources')?.append(fragment);
+        const sourcesDoc = document.querySelector('.sources');
+        if (sourcesDoc) sourcesDoc.append(fragment);
     }
 }
 

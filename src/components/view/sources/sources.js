@@ -1,7 +1,6 @@
 import './sources.css';
 class Sources {
     draw(data) {
-        var _a;
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp');
         data.forEach((item) => {
@@ -13,14 +12,16 @@ class Sources {
                         sourceItemName.textContent = item.source.name;
                     }
                     const sourceItem = sourceClone.querySelector('.source__item');
-                    if (sourceItem) {
+                    if (sourceItem && item.source.id) {
                         sourceItem.setAttribute('data-source-id', item.source.id);
                     }
                     fragment.append(sourceClone);
                 }
             }
         });
-        (_a = document.querySelector('.sources')) === null || _a === void 0 ? void 0 : _a.append(fragment);
+        const sourcesDoc = document.querySelector('.sources');
+        if (sourcesDoc)
+            sourcesDoc.append(fragment);
     }
 }
 export default Sources;

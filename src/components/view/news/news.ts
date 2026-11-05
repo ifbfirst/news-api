@@ -1,14 +1,14 @@
-import { NewsSource } from '../../../types';
+import { ArticleResponse } from '../../../types';
 import './news.css';
 
 class News {
-    draw(data: NewsSource[]) {
+    draw(data: ArticleResponse[]) {
         const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment();
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
 
-        news.forEach((item: NewsSource, idx) => {
+        news.forEach((item: ArticleResponse, idx) => {
             if (newsItemTemp) {
                 const newsClone: HTMLElement | null = <HTMLElement>newsItemTemp.content.cloneNode(true);
                 if (newsClone) {
@@ -45,8 +45,10 @@ class News {
             }
         });
         const newsDoc = document.querySelector('.news');
-        if (newsDoc) newsDoc.innerHTML = '';
-        document.querySelector('.news')?.appendChild(fragment);
+        if (newsDoc) {
+            newsDoc.innerHTML = '';
+            newsDoc.appendChild(fragment);
+        }
     }
 }
 

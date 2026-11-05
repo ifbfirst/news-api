@@ -1,7 +1,6 @@
 import './news.css';
 class News {
     draw(data) {
-        var _a;
         const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
         const fragment = document.createDocumentFragment();
         const newsItemTemp = document.querySelector('#newsItemTemp');
@@ -26,15 +25,24 @@ class News {
                     const newsDescriptionTitle = newsClone.querySelector('.news__description-title');
                     if (newsDescriptionTitle)
                         newsDescriptionTitle.textContent = item.title;
-                    newsClone.querySelector('.news__description-source').textContent = item.source.name;
-                    newsClone.querySelector('.news__description-content').textContent = item.description;
-                    newsClone.querySelector('.news__read-more a').setAttribute('href', item.url);
+                    const newsDescriptionSource = newsClone.querySelector('.news__description-source');
+                    if (newsDescriptionSource)
+                        newsDescriptionSource.textContent = item.source.name;
+                    const newsDescriptionContent = newsClone.querySelector('.news__description-content');
+                    if (newsDescriptionContent)
+                        newsDescriptionContent.textContent = item.description;
+                    const newsReadMore = newsClone.querySelector('.news__read-more a');
+                    if (newsReadMore)
+                        newsReadMore.setAttribute('href', item.url);
                     fragment.append(newsClone);
                 }
             }
         });
-        newsItemTemp('.news').innerHTML = '';
-        (_a = document.querySelector('.news')) === null || _a === void 0 ? void 0 : _a.appendChild(fragment);
+        const newsDoc = document.querySelector('.news');
+        if (newsDoc) {
+            newsDoc.innerHTML = '';
+            newsDoc.appendChild(fragment);
+        }
     }
 }
 export default News;
