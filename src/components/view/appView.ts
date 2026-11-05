@@ -21,6 +21,9 @@ export class AppView {
         const values = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }
+    drawSourcesSort() {
+        this.sources.drawSort();
+    }
 }
 
 export default AppView;

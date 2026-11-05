@@ -1,14 +1,23 @@
-.sources {
+.sources,
+.sources_filter {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
     overflow: auto;
     align-items: center;
     font: 300 1em 'Fira Sans', sans-serif;
 }
+.source__item {
+display: none;
+}
 
-.source__item, 
-.filter__item {
+.sources_filter{
+    max-width: 800px;
+    margin:0 auto;
+}
+
+.source__item {
     background: none;
     border: 2px solid #30c5ff;
     font: inherit;
@@ -20,8 +29,22 @@
     cursor: pointer;
 }
 
+.filter__item {
+    background: none;
+    border: 2px solid #30c5ff;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    color: #70d6ff;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
 .source__item:hover,
-.source__item:focus {
+.source__item:focus,
+.filter__item:hover,
+.filter__item:focus{
     border-color: #3fcc59;
     color: #69db7e;
     box-shadow: 0 0.5em 0.5em -0.4em #3fcc59;

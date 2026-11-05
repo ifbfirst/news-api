@@ -20,6 +20,7 @@ class App {
             );
         }
         this.controller.getSources((data?: SourcesResponse) => this.view.drawSources(data));
+        this.view.drawSourcesSort();
     }
 }
 
