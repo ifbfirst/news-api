@@ -1,9 +1,8 @@
 import AppLoader from './appLoader';
-import { SourcesResponse } from '../../types';
-import { ArticlesResponse } from '../../types';
+type Callback<T> = (data?: T) => void;
 
 class AppController extends AppLoader {
-    getSources(callback: (data: SourcesResponse) => void) {
+    getSources<T>(callback: Callback<T>) {
         super.getResp(
             {
                 endpoint: 'sources',
@@ -12,28 +11,30 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e, callback: (data: ArticlesResponse) => void) {
-        let target = e.target;
-        const newsContainer = e.currentTarget;
+    getNews<T>(e: Event, callback: Callback<T>) {
+        let target = <HTMLElement>e.target;
+        const newsContainer = <HTMLElement>e.currentTarget;
 
         while (target !== newsContainer) {
             if (target.classList.contains('source__item')) {
                 const sourceId = target.getAttribute('data-source-id');
-                if (newsContainer.getAttribute('data-source') !== sourceId) {
-                    newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
-                        {
-                            endpoint: 'everything',
-                            options: {
-                                sources: sourceId,
+                if (sourceId !== null) {
+                    if (newsContainer.getAttribute('data-source') !== sourceId) {
+                        newsContainer.setAttribute('data-source', sourceId);
+                        super.getResp(
+                            {
+                                endpoint: 'everything',
+                                options: {
+                                    sources: sourceId,
+                                },
                             },
-                        },
-                        callback
-                    );
+                            callback
+                        );
+                    }
                 }
                 return;
             }
-            target = target.parentNode;
+            target = <HTMLElement>target.parentNode;
         }
     }
 }

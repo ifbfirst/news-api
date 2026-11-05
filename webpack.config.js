@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -14,13 +15,11 @@ const baseConfig = {
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
-                
             },
         ],
     },
     resolve: {
-        extensions: ['.js'],
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.js'],
     },
     output: {
         filename: 'index.js',
